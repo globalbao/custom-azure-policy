@@ -1,0 +1,35 @@
+{
+  "mode": "All",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Authorization/roleAssignments"
+        },
+        {
+          "field": "Microsoft.Authorization/roleAssignments/principalType",
+          "equals": "[parameters('principalType')]"
+        }
+      ]
+    },
+    "then": {
+      "effect": "audit"
+    }
+  },
+  "parameters": {
+    "principalType": {
+      "type": "String",
+      "metadata": {
+        "displayName": "principalType",
+        "description": "Which principalType to audit against e.g. User"
+      },
+      "allowedValues": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "defaultValue": "User"
+    }
+  }
+}

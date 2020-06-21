@@ -1,0 +1,135 @@
+{
+      "mode": "All",
+      "parameters": {
+        "tagName0": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag #0",
+            "description": "Name of the tag e.g costcentre"
+          },
+          "defaultValue": "costcentre"
+        },
+        "tagName1": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag #1",
+            "description": "Name of the tag e.g application"
+          },
+          "defaultValue": "application"
+        },
+        "tagName2": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag #2",
+            "description": "Name of the tag e.g environment"
+          },
+          "defaultValue": "environment"
+        },
+        "tagName3": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag #3",
+            "description": "Name of the tag e.g owner"
+          },
+          "defaultValue": "owner"
+        },
+        "tagName4": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag #4",
+            "description": "Name of the tag e.g support"
+          },
+          "defaultValue": "support"
+        },
+        "tagName5": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag #5",
+            "description": "Name of the tag e.g managedby"
+          },
+          "defaultValue": "managedby"
+        },
+        "tagValue": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Tag Value for all Mandatory Tags",
+            "description": "Value of the tag e.g TBC"
+          },
+          "defaultValue": "TBC"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+            },
+            {
+              "allOf": [
+                {
+                  "field": "[concat('tags[', parameters('tagName0'), ']')]",
+                  "exists": "false"
+                },
+                {
+                  "field": "[concat('tags[', parameters('tagName1'), ']')]",
+                  "exists": "false"
+                },
+                {
+                  "field": "[concat('tags[', parameters('tagName2'), ']')]",
+                  "exists": "false"
+                },
+                {
+                  "field": "[concat('tags[', parameters('tagName3'), ']')]",
+                  "exists": "false"
+                },
+                {
+                  "field": "[concat('tags[', parameters('tagName4'), ']')]",
+                  "exists": "false"
+                }
+              ]
+            }
+          ]
+        },
+        "then": {
+          "effect": "modify",
+          "details": {
+            "roleDefinitionIds": [
+              "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            ],
+            "operations": [
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName0'), ']')]",
+                "value": "[parameters('tagValue')]"
+              },
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName1'), ']')]",
+                "value": "[parameters('tagValue')]"
+              },
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName2'), ']')]",
+                "value": "[parameters('tagValue')]"
+              },
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName3'), ']')]",
+                "value": "[parameters('tagValue')]"
+              },
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName4'), ']')]",
+                "value": "[parameters('tagValue')]"
+              },
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName5'), ']')]",
+                "value": "[parameters('tagValue')]"
+              }
+            ]
+          }
+        }
+      }
+}

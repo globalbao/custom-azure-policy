@@ -1,0 +1,50 @@
+{
+      "mode": "All",
+      "parameters": {
+        "tagName": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag [ExampleTag]",
+            "description": "Name of the tag e.g. ExampleTag"
+          },
+          "defaultValue": "ExampleTag"
+        },
+        "tagValue": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Tag Value",
+            "description": "Value of the tag e.g. TBC"
+          },
+          "defaultValue": "TBC"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+            },
+            {
+              "field": "[concat('tags[', parameters('tagName'), ']')]",
+              "exists": "false"
+            }
+          ]
+        },
+        "then": {
+          "effect": "modify",
+          "details": {
+            "roleDefinitionIds": [
+              "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            ],
+            "operations": [
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName'), ']')]",
+                "value": "[parameters('tagValue')]"
+              }
+            ]
+          }
+        }
+      }
+  }

@@ -1,0 +1,42 @@
+{
+      "mode": "Indexed",
+      "parameters": {
+        "tagName": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag [ExampleTag]",
+            "description": "Name of the tag e.g. ExampleTag"
+          },
+          "defaultValue": "ExampleTag"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "[concat('tags[', parameters('tagName'), ']')]",
+              "exists": "false"
+            },
+            {
+              "value": "[resourceGroup().tags[parameters('tagName')]]",
+              "notEquals": ""
+            }
+          ]
+        },
+        "then": {
+          "effect": "modify",
+          "details": {
+            "roleDefinitionIds": [
+              "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            ],
+            "operations": [
+              {
+                "operation": "add",
+                "field": "[concat('tags[', parameters('tagName'), ']')]",
+                "value": "[resourceGroup().tags[parameters('tagName')]]"
+              }
+            ]
+          }
+        }
+      }
+  }
