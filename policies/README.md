@@ -2,16 +2,13 @@
 [@GitBao](https://twitter.com/gitbao)
 
 ## Tag Governance
-
-### AddTagToRG
-### BulkAddTagsToRG
-### InheritTagFromRG
-### BulkInheritTagsFromRG
+* AddTagToRG
+* BulkAddTagsToRG
+* InheritTagFromRG
+* BulkInheritTagsFromRG
 
 ## Resource Locks
-
-### AuditLockOnNetworking
+* AuditLockOnNetworking
 
 ## RBAC Role Assignments
-
-### AuditRoleAssignmentType
+* AuditRoleAssignmentType
