@@ -1,22 +1,15 @@
 {
+  "name": "AddTagToRG",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2019-06-01",
+  "properties": {
+      "policyType": "Custom",
       "mode": "All",
-      "parameters": {
-        "tagName": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag [ExampleTag]",
-            "description": "Name of the tag e.g. ExampleTag"
-          },
-          "defaultValue": "ExampleTag"
-        },
-        "tagValue": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Tag Value",
-            "description": "Value of the tag e.g. TBC"
-          },
-          "defaultValue": "TBC"
-        }
+      "displayName": "AddTagToRG",
+      "description": "Adds the mandatory tag key when any resource group missing this tag is created or updated. \nExisting resource groups can be remediated by triggering a remediation task.\nIf the tag exists with a different value it will not be changed.",
+      "metadata": {
+        "version": "1.0.0",
+        "category": "Custom-Tags"
       },
       "policyRule": {
         "if": {
@@ -46,5 +39,24 @@
             ]
           }
         }
+      },
+      "parameters": {
+        "tagName": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Mandatory Tag [ExampleTag]",
+            "description": "Name of the tag e.g. ExampleTag"
+          },
+          "defaultValue": "ExampleTag"
+        },
+        "tagValue": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Tag Value",
+            "description": "Value of the tag e.g. TBC"
+          },
+          "defaultValue": "TBC"
+        }
       }
   }
+}
