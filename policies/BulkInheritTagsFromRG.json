@@ -1,147 +1,147 @@
 {
-      "mode": "Indexed",
-      "parameters": {
-        "tagName0": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag #0",
-            "description": "Name of the tag e.g costcentre"
-          },
-          "defaultValue": "costcentre"
+  "mode":"Indexed",
+  "parameters":{
+     "tagName0":{
+        "type":"String",
+        "metadata":{
+           "displayName":"Mandatory Tag #0",
+           "description":"Name of the tag e.g costcentre"
         },
-        "tagName1": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag #1",
-            "description": "Name of the tag e.g application"
-          },
-          "defaultValue": "application"
+        "defaultValue":"costcentre"
+     },
+     "tagName1":{
+        "type":"String",
+        "metadata":{
+           "displayName":"Mandatory Tag #1",
+           "description":"Name of the tag e.g application"
         },
-        "tagName2": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag #2",
-            "description": "Name of the tag e.g environment"
-          },
-          "defaultValue": "environment"
+        "defaultValue":"application"
+     },
+     "tagName2":{
+        "type":"String",
+        "metadata":{
+           "displayName":"Mandatory Tag #2",
+           "description":"Name of the tag e.g environment"
         },
-        "tagName3": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag #3",
-            "description": "Name of the tag e.g owner"
-          },
-          "defaultValue": "owner"
+        "defaultValue":"environment"
+     },
+     "tagName3":{
+        "type":"String",
+        "metadata":{
+           "displayName":"Mandatory Tag #3",
+           "description":"Name of the tag e.g owner"
         },
-        "tagName4": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag #4",
-            "description": "Name of the tag e.g support"
-          },
-          "defaultValue": "support"
+        "defaultValue":"owner"
+     },
+     "tagName4":{
+        "type":"String",
+        "metadata":{
+           "displayName":"Mandatory Tag #4",
+           "description":"Name of the tag e.g support"
         },
-        "tagName5": {
-          "type": "String",
-          "metadata": {
-            "displayName": "Mandatory Tag #5",
-            "description": "Name of the tag e.g managedby"
-          },
-          "defaultValue": "managedby"
-        }
+        "defaultValue":"support"
+     },
+     "tagName5":{
+        "type":"String",
+        "metadata":{
+           "displayName":"Mandatory Tag #5",
+           "description":"Name of the tag e.g managedby"
         },
-      "policyRule": {
-        "if": {
-          "allOf": [
-            {
-              "field": "[concat('tags[', parameters('tagName0'), ']')]",
-              "exists": "false"
-            },
-            {
-              "field": "[concat('tags[', parameters('tagName1'), ']')]",
-              "exists": "false"
-            },
-            {
-              "field": "[concat('tags[', parameters('tagName2'), ']')]",
-              "exists": "false"
-            },
-            {
-              "field": "[concat('tags[', parameters('tagName3'), ']')]",
-              "exists": "false"
-            },
-            {
-              "field": "[concat('tags[', parameters('tagName4'), ']')]",
-              "exists": "false"
-            },
-            {
-              "field": "[concat('tags[', parameters('tagName5'), ']')]",
-              "exists": "false"
-            },
-            {
-              "value": "[resourceGroup().tags[parameters('tagName0')]]",
-              "notEquals": ""
-            },
-            {
-              "value": "[resourceGroup().tags[parameters('tagName1')]]",
-              "notEquals": ""
-            },
-            {
-              "value": "[resourceGroup().tags[parameters('tagName2')]]",
-              "notEquals": ""
-            }
-            ,            {
-              "value": "[resourceGroup().tags[parameters('tagName3')]]",
-              "notEquals": ""
-            }
-            ,            {
-              "value": "[resourceGroup().tags[parameters('tagName4')]]",
-              "notEquals": ""
-            }
-            ,            {
-              "value": "[resourceGroup().tags[parameters('tagName5')]]",
-              "notEquals": ""
-            }
-          ]
-        },
-        "then": {
-          "effect": "modify",
-          "details": {
-            "roleDefinitionIds": [
+        "defaultValue":"managedby"
+     }
+  },
+  "policyRule":{
+     "if":{
+        "allOf":[
+           {
+              "field":"[concat('tags[', parameters('tagName0'), ']')]",
+              "exists":"false"
+           },
+           {
+              "field":"[concat('tags[', parameters('tagName1'), ']')]",
+              "exists":"false"
+           },
+           {
+              "field":"[concat('tags[', parameters('tagName2'), ']')]",
+              "exists":"false"
+           },
+           {
+              "field":"[concat('tags[', parameters('tagName3'), ']')]",
+              "exists":"false"
+           },
+           {
+              "field":"[concat('tags[', parameters('tagName4'), ']')]",
+              "exists":"false"
+           },
+           {
+              "field":"[concat('tags[', parameters('tagName5'), ']')]",
+              "exists":"false"
+           },
+           {
+              "value":"[resourceGroup().tags[parameters('tagName0')]]",
+              "notEquals":""
+           },
+           {
+              "value":"[resourceGroup().tags[parameters('tagName1')]]",
+              "notEquals":""
+           },
+           {
+              "value":"[resourceGroup().tags[parameters('tagName2')]]",
+              "notEquals":""
+           },
+           {
+              "value":"[resourceGroup().tags[parameters('tagName3')]]",
+              "notEquals":""
+           },
+           {
+              "value":"[resourceGroup().tags[parameters('tagName4')]]",
+              "notEquals":""
+           },
+           {
+              "value":"[resourceGroup().tags[parameters('tagName5')]]",
+              "notEquals":""
+           }
+        ]
+     },
+     "then":{
+        "effect":"modify",
+        "details":{
+           "roleDefinitionIds":[
               "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
-            ],
-            "operations": [
+           ],
+           "operations":[
               {
-                "operation": "add",
-                "field": "[concat('tags[', parameters('tagName0'), ']')]",
-                "value": "[resourceGroup().tags[parameters('tagName0')]]"
+                 "operation":"add",
+                 "field":"[concat('tags[', parameters('tagName0'), ']')]",
+                 "value":"[resourceGroup().tags[parameters('tagName0')]]"
               },
               {
-                "operation": "add",
-                "field": "[concat('tags[', parameters('tagName1'), ']')]",
-                "value": "[resourceGroup().tags[parameters('tagName1')]]"
+                 "operation":"add",
+                 "field":"[concat('tags[', parameters('tagName1'), ']')]",
+                 "value":"[resourceGroup().tags[parameters('tagName1')]]"
               },
               {
-                "operation": "add",
-                "field": "[concat('tags[', parameters('tagName2'), ']')]",
-                "value": "[resourceGroup().tags[parameters('tagName2')]]"
+                 "operation":"add",
+                 "field":"[concat('tags[', parameters('tagName2'), ']')]",
+                 "value":"[resourceGroup().tags[parameters('tagName2')]]"
               },
               {
-                "operation": "add",
-                "field": "[concat('tags[', parameters('tagName3'), ']')]",
-                "value": "[resourceGroup().tags[parameters('tagName3')]]"
+                 "operation":"add",
+                 "field":"[concat('tags[', parameters('tagName3'), ']')]",
+                 "value":"[resourceGroup().tags[parameters('tagName3')]]"
               },
               {
-                "operation": "add",
-                "field": "[concat('tags[', parameters('tagName4'), ']')]",
-                "value": "[resourceGroup().tags[parameters('tagName4')]]"
+                 "operation":"add",
+                 "field":"[concat('tags[', parameters('tagName4'), ']')]",
+                 "value":"[resourceGroup().tags[parameters('tagName4')]]"
               },
               {
-                "operation": "add",
-                "field": "[concat('tags[', parameters('tagName5'), ']')]",
-                "value": "[resourceGroup().tags[parameters('tagName5')]]"
+                 "operation":"add",
+                 "field":"[concat('tags[', parameters('tagName5'), ']')]",
+                 "value":"[resourceGroup().tags[parameters('tagName5')]]"
               }
-            ]
-          }
+           ]
         }
-      }
+     }
   }
+}

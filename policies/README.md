@@ -6,9 +6,14 @@
 * BulkAddTagsToRG
 * InheritTagFromRG
 * BulkInheritTagsFromRG
+* InheritTagFromRGOverwriteExisting
 
 ## Resource Locks
 * AuditLockOnNetworking
 
 ## RBAC Role Assignments
 * AuditRoleAssignmentType
+
+## Metric Alerts
+* DeployMetricAlertAppGateway
+* DeployMetricAlertLoadBalancer

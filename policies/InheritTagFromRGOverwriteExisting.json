@@ -1,0 +1,67 @@
+{
+    "mode":"Indexed",
+    "parameters":{
+       "tagName":{
+          "type":"String",
+          "metadata":{
+             "displayName":"Mandatory Tag [ExampleTag]",
+             "description":"Name of the tag e.g. ExampleTag"
+          },
+          "defaultValue":"ExampleTag"
+       },
+       "tagValuesToIgnore":{
+          "type":"Array",
+          "metadata":{
+             "displayName":"Tag values to ignore for inheritance",
+             "description":"A list of tag values to ignore when evaluating tag inheritance from the RG"
+          },
+          "defaultValue":[
+             "tbc",
+             "'tbc'",
+             "TBC",
+             "'TBC'",
+             "to_be_confirmed",
+             "'to_be_confirmed'",
+             "to be confirmed",
+             "'to be confirmed'"
+          ]
+       }
+    },
+    "policyRule":{
+       "if":{
+          "allOf":[
+             {
+                "field":"[concat('tags[', parameters('tagName'), ']')]",
+                "exists":"true"
+             },
+             {
+                "value":"[resourceGroup().tags[parameters('tagName')]]",
+                "notEquals":""
+             },
+             {
+                "field":"[concat('tags[', parameters('tagName'), ']')]",
+                "notEquals":"[resourceGroup().tags[parameters('tagName')]]"
+             },
+             {
+                "value":"[resourceGroup().tags[parameters('tagName')]]",
+                "notIn":"[parameters('tagValuesToIgnore')]"
+             }
+          ]
+       },
+       "then":{
+          "effect":"modify",
+          "details":{
+             "roleDefinitionIds":[
+                "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+             ],
+             "operations":[
+                {
+                   "operation":"addOrReplace",
+                   "field":"[concat('tags[', parameters('tagName'), ']')]",
+                   "value":"[resourceGroup().tags[parameters('tagName')]]"
+                }
+             ]
+          }
+       }
+    }
+}

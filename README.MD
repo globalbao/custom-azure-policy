@@ -1,5 +1,7 @@
 # Custom Azure Policy
 
+JSON files containing custom Azure Policies I've authored & tested.
+
 ![JSON Linter](https://github.com/globalbao/custom-azure-policy/workflows/Lint%20Code%20Base/badge.svg)
 
 ## Blogs that might interest you :pencil:
