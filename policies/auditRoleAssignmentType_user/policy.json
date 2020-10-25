@@ -1,0 +1,46 @@
+{
+ "properties": {
+  "displayName": "Audit user role assignments",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This policy checks for any Role Assignments of Type [User] - useful to catch individual IAM assignments to resources/RGs which are out of compliance with the RBAC standards e.g. using Groups for RBAC.",
+  "metadata": {
+   "category": "Custom",
+   "version": "1.0.0"
+  },
+  "parameters": {
+   "principalType": {
+    "type": "String",
+    "metadata": {
+     "description": "Which principalType to audit against e.g. 'User'",
+     "displayName": "principalType"
+    },
+    "allowedValues": [
+     "User",
+     "Group",
+     "ServicePrincipal"
+    ],
+    "defaultValue": "User"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "equals": "Microsoft.Authorization/roleAssignments",
+      "field": "type"
+     },
+     {
+      "equals": "[parameters('principalType')]",
+      "field": "Microsoft.Authorization/roleAssignments/principalType"
+     }
+    ]
+   },
+   "then": {
+    "effect": "audit"
+   }
+  }
+ },
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "auditRoleAssignmentType_user"
+}

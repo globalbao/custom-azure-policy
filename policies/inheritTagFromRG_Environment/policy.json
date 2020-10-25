@@ -1,0 +1,53 @@
+{
+ "properties": {
+  "displayName": "Inherit tag Environment from the resource group",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "description": "Adds the specified mandatory tag Environment with its value from the parent resource group when any resource missing this tag is created or updated. Existing resources can be remediated by triggering a remediation task. If the tag exists with a different value it will not be changed.",
+  "metadata": {
+   "category": "Custom",
+   "version": "1.0.0"
+  },
+  "parameters": {
+   "tagName": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'Environment'",
+     "displayName": "Mandatory Tag Environment"
+    },
+    "defaultValue": "Environment"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName'), ']')]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName')]]"
+     }
+    ]
+   },
+   "then": {
+    "details": {
+     "operations": [
+      {
+       "field": "[concat('tags[', parameters('tagName'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName')]]"
+      }
+     ],
+     "roleDefinitionIds": [
+      "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+     ]
+    },
+    "effect": "modify"
+   }
+  }
+ },
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "inheritTagFromRG_Environment"
+}

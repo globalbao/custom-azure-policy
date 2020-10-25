@@ -1,0 +1,50 @@
+{
+ "properties": {
+  "displayName": "Audit lock on networking",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This policy audits if a resource lock 'CanNotDelete' or 'ReadOnly' has been applied to the specified Networking components.",
+  "metadata": {
+   "category": "Custom",
+   "version": "1.0.0"
+  },
+  "parameters": {
+   "resourceTypes": {
+    "type": "Array",
+    "metadata": {
+     "description": "Azure resource types to audit for Locks",
+     "displayName": "resourceTypes"
+    },
+    "defaultValue": [
+     "microsoft.network/expressroutecircuits",
+     "microsoft.network/expressroutegateways",
+     "microsoft.network/virtualnetworks",
+     "microsoft.network/virtualnetworkgateways",
+     "microsoft.network/vpngateways",
+     "microsoft.network/p2svpngateways"
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "in": "[parameters('resourceTypes')]"
+   },
+   "then": {
+    "details": {
+     "existenceCondition": {
+      "field": "Microsoft.Authorization/locks/level",
+      "in": [
+       "ReadOnly",
+       "CanNotDelete"
+      ]
+     },
+     "type": "Microsoft.Authorization/locks"
+    },
+    "effect": "auditIfNotExists"
+   }
+  }
+ },
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "auditLockOnNetworking"
+}

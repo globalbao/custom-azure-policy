@@ -1,19 +1,4 @@
 # Custom Azure Policies 
 [@GitBao](https://twitter.com/gitbao)
 
-## Tag Governance
-* AddTagToRG
-* BulkAddTagsToRG
-* InheritTagFromRG
-* BulkInheritTagsFromRG
-* InheritTagFromRGOverwriteExisting
-
-## Resource Locks
-* AuditLockOnNetworking
-
-## RBAC Role Assignments
-* AuditRoleAssignmentType
-
-## Metric Alerts
-* DeployMetricAlertAppGateway
-* DeployMetricAlertLoadBalancer
+Files named `policy.json` have been exported from Azure using the `export definition` option. https://docs.microsoft.com/en-us/azure/governance/policy/how-to/export-resources

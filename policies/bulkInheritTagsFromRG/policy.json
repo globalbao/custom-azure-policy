@@ -1,0 +1,158 @@
+{
+ "properties": {
+  "displayName": "Bulk inherit tags from the resource group",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "description": "Bulk adds the specified mandatory tags with its value from the parent resource group when any resource missing this tag is created or updated. Existing resources can be remediated by triggering a remediation task. If the tag exists with a different value it will not be changed.",
+  "metadata": {
+   "category": "Custom",
+   "version": "1.0.0"
+  },
+  "parameters": {
+   "tagName1": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'Application'",
+     "displayName": "Mandatory Tag Application"
+    },
+    "defaultValue": "Application"
+   },
+   "tagName2": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'CostCentre'",
+     "displayName": "Mandatory Tag CostCentre"
+    },
+    "defaultValue": "CostCentre"
+   },
+   "tagName3": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'Environment'",
+     "displayName": "Mandatory Tag Environment"
+    },
+    "defaultValue": "Environment"
+   },
+   "tagName4": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'ManagedBy'",
+     "displayName": "Mandatory Tag ManagedBy"
+    },
+    "defaultValue": "ManagedBy"
+   },
+   "tagName5": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'Owner'",
+     "displayName": "Mandatory Tag Owner"
+    },
+    "defaultValue": "Owner"
+   },
+   "tagName6": {
+    "type": "String",
+    "metadata": {
+     "description": "Name of the tag, such as 'Support'",
+     "displayName": "Mandatory Tag Support"
+    },
+    "defaultValue": "Support"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName1'), ']')]"
+     },
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName2'), ']')]"
+     },
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName3'), ']')]"
+     },
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName4'), ']')]"
+     },
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName5'), ']')]"
+     },
+     {
+      "exists": "false",
+      "field": "[concat('tags[', parameters('tagName6'), ']')]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName1')]]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName2')]]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName3')]]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName4')]]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName5')]]"
+     },
+     {
+      "notEquals": "",
+      "value": "[resourceGroup().tags[parameters('tagName6')]]"
+     }
+    ]
+   },
+   "then": {
+    "details": {
+     "operations": [
+      {
+       "field": "[concat('tags[', parameters('tagName1'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName1')]]"
+      },
+      {
+       "field": "[concat('tags[', parameters('tagName2'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName2')]]"
+      },
+      {
+       "field": "[concat('tags[', parameters('tagName3'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName3')]]"
+      },
+      {
+       "field": "[concat('tags[', parameters('tagName4'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName4')]]"
+      },
+      {
+       "field": "[concat('tags[', parameters('tagName5'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName5')]]"
+      },
+      {
+       "field": "[concat('tags[', parameters('tagName6'), ']')]",
+       "operation": "add",
+       "value": "[resourceGroup().tags[parameters('tagName6')]]"
+      }
+     ],
+     "roleDefinitionIds": [
+      "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+     ]
+    },
+    "effect": "modify"
+   }
+  }
+ },
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "bulkInheritTagsFromRG"
+}
